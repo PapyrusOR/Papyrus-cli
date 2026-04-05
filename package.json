@@ -1,6 +1,6 @@
 {
   "name": "@alpacali/papyrus-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Papyrus CLI - Command line interface for Papyrus SRS learning system",
   "type": "module",
   "main": "dist/index.js",
