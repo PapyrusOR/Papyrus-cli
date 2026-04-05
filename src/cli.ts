@@ -34,6 +34,38 @@ import { docsCommand, serveCommand, statusCommand, stopCommand } from "./command
 // Version - will be replaced by build process
 const version = "1.0.0";
 
+// ASCII Art Banner
+const ASCII_BANNER = `
+╔═══════════════════════════════════════════════════════════════╗
+║                          PAPYRUS CLI                          ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║ █████████████████████████████████████████████████████████████ ║
+║ █                    •                                      █ ║
+║ █               •          •∙                       ·       █ ║
+║ █  ▓▓▓▓▓▓▓  ▓▓▓▓▓  ▓▓▓▓▓▓▓ ▓▓   ▓▓ ▓▓▓▓▓▓▓ ▓▓   ▓▓  ▓▓▓▓▓▓  █ ║
+║ █  ▓▓   ▓▓ ▓▓   ▓▓ ▓▓   ▓▓ ▓▓   ▓▓ ▓▓   ▓▓ ▓▓   ▓▓ ▓▓       █ ║
+║ █  ▓▓   ▓▓ ▓▓   ▓▓ ▓▓   ▓▓ ▓▓   ▓▓ ▓▓   ▓▓ ▓▓   ▓▓ ▓▓       █ ║
+║ █  ▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓∙ ▓▓▓▓▓  ▓▓▓▓▓▓▓ ▓▓   ▓▓  ▓▓▓▓▓   █ ║
+║ █  ▓▓      ▓▓   ▓▓ ▓▓         ▓▓   ▓▓ ▓▓  ∙▓▓·  ▓▓      ▓▓  █ ║
+║ █ ·▓▓   ·  ▓▓   ▓▓ ▓▓         ▓▓ • ▓▓  ▓▓∙ ▓▓∙  ▓▓      ▓▓  █ ║
+║ █  ▓▓ ·    ▓▓   ▓▓ ▓▓         ▓▓   ▓▓   ▓▓  ▓▓▓▓▓  ▓▓▓▓▓▓   █ ║
+║ █                      ·       ∙                            █ ║
+║ █       ·                                   ·               █ ║
+║ █       •    •     ▓▓▓▓▓▓  ▓▓       ▓▓▓▓▓▓▓                 █ ║
+║ █•              · ▓▓       ▓▓        ·▓▓▓           ·•      █ ║
+║ █  ∙              ▓▓       ▓▓         ▓▓▓    ••         •   █ ║
+║ █       ·         ▓▓       ▓▓         ▓▓▓         ∙         █ ║
+║ █  ·              ▓▓       ▓▓ ·  ·    ▓▓▓               ·   █ ║
+║ █              ∙  ▓▓•      ▓▓         ▓▓▓                   █ ║
+║ █               •  ▓▓▓▓▓▓  ▓▓▓▓▓▓▓ ·▓▓▓▓▓▓▓          ∙ •  · █ ║
+║ █             •              •          ·•·           ·     █ ║
+║ █       ·                     •             •          ∙    █ ║
+║ █████████████████████████████████████████████████████████████ ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+`;
+
 // Create CLI
 const program = new Command()
   .name("papyrus")
@@ -409,6 +441,13 @@ program.exitOverride();
 
 async function main() {
   try {
+    // Check if no arguments provided - show banner only
+    if (process.argv.length <= 2) {
+      console.log(chalk.cyan(ASCII_BANNER));
+      console.log(chalk.gray(`Version: ${version}`));
+      console.log(chalk.dim(`Run "papyrus --help" for available commands.\n`));
+      return;
+    }
     await program.parseAsync();
   } catch (error) {
     // Commander handles its own errors
